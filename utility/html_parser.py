@@ -47,3 +47,10 @@ class HTMLParser:
                 return trade_data
         return None
 
+if __name__ == "__main__":
+    url = "https://www.quiverquant.com/congresstrading/politician/Nancy%20Pelosi-P000197"
+    parser = HTMLParser()
+    parser.parse_html(url)
+    print(parser.get_title())
+    print(parser.get_paragraphs())
+    trade_data = parser.extract_data('script', 'let tradeData')
