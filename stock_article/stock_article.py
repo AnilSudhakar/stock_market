@@ -1,4 +1,5 @@
 import yfinance as yf
+import time
 
 class StockArticle:
 
@@ -6,10 +7,21 @@ class StockArticle:
         pass
 
     def fetch_quotes(self, symbol, max_results=10):
-        return yf.Search(symbol, max_results=max_results).quotes
+        return self._retry(lambda: yf.Search(symbol, max_results=max_results).quotes)
 
     def fetch_news(self, symbol, news_count=10):
-        return yf.Search(symbol, news_count=news_count).news
+        return self._retry(lambda: yf.Search(symbol, news_count=news_count).news)
 
     def fetch_research(self, symbol, include_research=True):
-        return yf.Search(symbol, include_research=include_research).research
+        return self._retry(lambda: yf.Search(symbol, include_research=include_research).research)
+
+    def _retry(self, func, retries=3, delay=5):
+        for i in range(retries):
+            try:
+                return func()
+            except Exception as e:
+                print(f'Failed to fetch data. Retrying in {delay} seconds...')
+                if i < retries - 1:
+                    time.sleep(delay)
+                else:
+                    raise
