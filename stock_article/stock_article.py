@@ -25,3 +25,12 @@ class StockArticle:
                     time.sleep(delay)
                 else:
                     raise
+
+if __name__ == "__main__":
+    stock_article = StockArticle()
+    quotes = stock_article.fetch_quotes("AAPL")
+    print(quotes)
+    news = stock_article.fetch_news("AAPL")
+    print(news)
+    research = stock_article.fetch_research("AAPL")
+    print(research)
