@@ -8,5 +8,6 @@ dependencies = [
     "beautifulsoup4>=4.13.3",
     "ipykernel>=6.29.5",
     "openpyxl>=3.1.5",
+    "pyyaml>=6.0.2",
     "yfinance>=0.2.54",
 ]
