@@ -11,3 +11,6 @@ wheels/
 
 # Text files
 output/
+
+# Excel files
+quiver_qunatitatives/
